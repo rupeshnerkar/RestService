@@ -7,7 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
-public interface GetCanadaServiceApi {
+public interface GetCanadaApi {
     @POST("facts.json")
     Call<AboutCanadaResponseDTO> getCanadaInfo(@Header("Content-Type") String contentType, @Header("Accept") String accept);
 }
