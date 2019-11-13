@@ -1,13 +1,11 @@
 package com.example.consumerestapis.platform.models.responseDTO;
 
-
-
 import java.util.List;
 
 public class AboutCanadaResponseDTO {
 
     private String title;
-    private List<CanadaRows> rows = null;
+    private List<CountryRow> rows = null;
 
     public String getTitle() {
         return title;
@@ -17,11 +15,11 @@ public class AboutCanadaResponseDTO {
         this.title = title;
     }
 
-    public List<CanadaRows> getRows() {
+    public List<CountryRow> getRows() {
         return rows;
     }
 
-    public void setRows(List<CanadaRows> rows) {
+    public void setRows(List<CountryRow> rows) {
         this.rows = rows;
     }
 

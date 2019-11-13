@@ -11,44 +11,45 @@ import android.widget.TextView;
 
 
 import com.example.consumerestapis.R;
-import com.example.consumerestapis.platform.CanadaDetailPresenter;
-import com.example.consumerestapis.platform.CanadaInfoContract;
-import com.example.consumerestapis.platform.models.responseDTO.CanadaRows;
+import com.example.consumerestapis.adapter.CountryDetailsListAdapter;
+import com.example.consumerestapis.platform.CountryDetailAppPresenter;
+import com.example.consumerestapis.platform.CountryInfoContract;
+import com.example.consumerestapis.platform.models.responseDTO.CountryRow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CanadaListView extends AppCompatActivity implements CanadaInfoContract.view {
+public class CountryDetailsActivity extends AppCompatActivity implements CountryInfoContract.view {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private TextView title, description;
     private ImageView image_to_show;
 
-    List<CanadaRows> canadaRows;
-    ListAdapter listAdapter;
-    CanadaDetailPresenter canadaDetailPresenter;
+    List<CountryRow> countryRows;
+    CountryDetailsListAdapter countryDetailsListAdapter;
+    CountryDetailAppPresenter countryDetailAppPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
 
-        canadaDetailPresenter = new CanadaDetailPresenter(this);
-        canadaDetailPresenter.requestDataFromServer();
+        countryDetailAppPresenter = new CountryDetailAppPresenter(this);
+        countryDetailAppPresenter.requestDataFromServer();
        // setListViewData();
-//        Log.e("Mainnnn", "Number of detail received: " + canadaRows.size());
+//        Log.e("Mainnnn", "Number of detail received: " + countryRows.size());
     }
 
     @Override
     public void init() {
         recyclerView = (RecyclerView) findViewById(R.id.main_recyclerview);
-        canadaRows = new ArrayList<>();
+        countryRows = new ArrayList<>();
 
-        listAdapter = new ListAdapter(CanadaListView.this, canadaRows);
+        countryDetailsListAdapter = new CountryDetailsListAdapter(CountryDetailsActivity.this, countryRows);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(listAdapter);
+        recyclerView.setAdapter(countryDetailsListAdapter);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         title = (TextView) findViewById(R.id.title);
@@ -63,10 +64,10 @@ public class CanadaListView extends AppCompatActivity implements CanadaInfoContr
     }
 
     @Override
-    public void setListViewData(List<CanadaRows> canadaRows) {
-        canadaRows.addAll(canadaRows);
-        Log.e("Hellllo", "Number of detail received: " + canadaRows.size());
-        listAdapter.notifyDataSetChanged();
+    public void setListViewData(List<CountryRow> countryRows) {
+        this.countryRows.addAll(countryRows);
+        Log.e("Hellllo", "Number of detail received: " + countryRows.size());
+        countryDetailsListAdapter.notifyDataSetChanged();
     }
 
 

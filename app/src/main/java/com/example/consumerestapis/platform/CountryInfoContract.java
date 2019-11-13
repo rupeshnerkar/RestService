@@ -1,26 +1,27 @@
 package com.example.consumerestapis.platform;
 
-import com.example.consumerestapis.platform.models.responseDTO.CanadaRows;
+import com.example.consumerestapis.platform.models.responseDTO.CountryRow;
 
 import java.util.List;
 
-public interface CanadaInfoContract {
+public interface CountryInfoContract {
 
     interface model {
         interface OnFinishedListener {
-            void onFinished(List<CanadaRows> canadaRows);
+            void onFinished(List<CountryRow> countryRows);
 
             void onFailure(Throwable t);
         }
+
         void getCanadaDetails(OnFinishedListener onFinishedListener);
-}
+    }
 
     interface view {
         void init();
 
         void setListener();
 
-        void setListViewData(List<CanadaRows> canadaRows);
+        void setListViewData(List<CountryRow> countryRows);
     }
 
     interface Presenter {

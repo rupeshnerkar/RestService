@@ -3,7 +3,6 @@ package com.example.consumerestapis.retrofit;
 import com.example.consumerestapis.platform.models.responseDTO.AboutCanadaResponseDTO;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
