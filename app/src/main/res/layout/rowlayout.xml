@@ -3,39 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/background_light">
+    android:background="@drawable/single_component_background">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hi Hello, How are you? structure of JSON data coming from"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textSize="20sp"
+        android:text="Hello"
+        android:textColor="@android:color/holo_blue_dark" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="Hey Are you there???,Hi Hello, How are you? "
-             />
+            android:layout_toStartOf="@+id/show_image"
+            android:layout_alignParentStart="true"
+            android:textSize="15sp"
+            />
 
         <ImageView
             android:id="@+id/show_image"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_weight=".5"
-            app:srcCompat="@drawable/cover_small" />
+            android:layout_alignParentEnd="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

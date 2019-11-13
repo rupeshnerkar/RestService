@@ -27,8 +27,8 @@ public class CountryDetailAppPresenter implements CountryInfoContract.Presenter,
     }
 
     @Override
-    public void onFinished(List<CountryRow> countryRows) {
-        canadaInfoView.setListViewData(countryRows);
+    public void onFinished(List<CountryRow> countryRows,String title) {
+        canadaInfoView.setListViewData(countryRows,title);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class CountryDetail implements CountryInfoContract.model {
                     if (response.code() == 200 && null != response.body()){
                         List<CountryRow> canadaRows = response.body().getRows();
                         Log.e("Hi", "Number of detail received: " + canadaRows.size());
-                        onFinishedListener.onFinished(canadaRows);
+                        onFinishedListener.onFinished(canadaRows,response.body().getTitle());
                     }
                 }catch(Exception e){
                     e.printStackTrace();

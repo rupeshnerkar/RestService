@@ -8,7 +8,7 @@ public interface CountryInfoContract {
 
     interface model {
         interface OnFinishedListener {
-            void onFinished(List<CountryRow> countryRows);
+            void onFinished(List<CountryRow> countryRows,String title);
 
             void onFailure(Throwable t);
         }
@@ -21,7 +21,7 @@ public interface CountryInfoContract {
 
         void setListener();
 
-        void setListViewData(List<CountryRow> countryRows);
+        void setListViewData(List<CountryRow> countryRows,String title);
     }
 
     interface Presenter {
