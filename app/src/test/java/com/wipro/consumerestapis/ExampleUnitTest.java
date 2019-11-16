@@ -1,7 +1,8 @@
-package com.example.consumerestapis;
+package com.wipro.consumerestapis;
 
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 
 /**

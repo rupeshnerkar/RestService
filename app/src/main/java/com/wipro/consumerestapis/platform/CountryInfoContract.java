@@ -1,6 +1,6 @@
-package com.example.consumerestapis.platform;
+package com.wipro.consumerestapis.platform;
 
-import com.example.consumerestapis.platform.models.responseDTO.CountryRow;
+import com.wipro.consumerestapis.platform.models.responseDTO.CountryRow;
 
 import java.util.List;
 

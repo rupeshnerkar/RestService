@@ -1,23 +1,29 @@
-package com.example.consumerestapis.main;
+package com.wipro.consumerestapis.main;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
-import com.example.consumerestapis.R;
-import com.example.consumerestapis.adapter.CountryDetailsListAdapter;
-import com.example.consumerestapis.platform.CountryDetailAppPresenter;
-import com.example.consumerestapis.platform.CountryInfoContract;
-import com.example.consumerestapis.platform.models.responseDTO.CountryRow;
+import com.wipro.consumerestapis.R;
+import com.wipro.consumerestapis.adapter.CountryDetailsListAdapter;
+import com.wipro.consumerestapis.platform.CountryDetailAppPresenter;
+import com.wipro.consumerestapis.platform.CountryInfoContract;
+import com.wipro.consumerestapis.platform.models.responseDTO.CountryRow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.consumerestapis.platform.constants.LocalConstants.KEY_RECYCLER_STATE;
+import static com.wipro.consumerestapis.platform.constants.LocalConstants.KEY_RECYCLER_STATE;
 
 public class CountryDetailsActivity extends AppCompatActivity implements CountryInfoContract.view {
 
@@ -26,7 +32,8 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
     RecyclerView.LayoutManager layoutManager;
     Bundle mBundleRecyclerViewState = new Bundle();
     Parcelable listState;
-
+    Snackbar snackbar;
+    CoordinatorLayout coordinatorLayout;
     List<CountryRow> countryRows;
     CountryDetailsListAdapter countryDetailsListAdapter;
     CountryDetailAppPresenter countryDetailAppPresenter;
@@ -35,11 +42,37 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+        if (isNetworkAvailable(CountryDetailsActivity.this)) {
+            init();
 
-        countryDetailAppPresenter = new CountryDetailAppPresenter(this);
-        countryDetailAppPresenter.requestDataFromServer();
+            countryDetailAppPresenter = new CountryDetailAppPresenter(this);
+            countryDetailAppPresenter.requestDataFromServer();
+        } else {
+            openSnackbar();
+        }
 
+    }
+
+    private void openSnackbar() {
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        snackbar = Snackbar
+                .make(coordinatorLayout, getString(R.string.NETWORK_ERROR), Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(R.string.RETRY), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (isNetworkAvailable(CountryDetailsActivity.this)) {
+                            init();
+
+                            countryDetailAppPresenter = new CountryDetailAppPresenter(CountryDetailsActivity.this);
+                            countryDetailAppPresenter.requestDataFromServer();
+                        } else {
+                            openSnackbar();
+                        }
+                    }
+                });
+
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
     }
 
     @Override
@@ -63,12 +96,15 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
     @Override
     protected void onRestoreInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-       if(outState != null){
-           listState = outState.getParcelable(KEY_RECYCLER_STATE);
-       }
+        if (outState != null) {
+            listState = outState.getParcelable(KEY_RECYCLER_STATE);
+        }
     }
 
-
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
 
     @Override
     public void init() {
@@ -86,11 +122,11 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                countryRows.clear();
                 countryDetailAppPresenter.requestDataFromServer();
             }
         });
     }
-
 
     @Override
     public void setListener() {
@@ -102,7 +138,6 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
         swipeRefreshLayout.setRefreshing(false);
         this.countryRows.addAll(countryRows);
         ((CountryDetailsActivity) this).getSupportActionBar().setTitle(title);
-        Log.e("Hellllo", "Number of detail received: " + countryRows.size());
         countryDetailsListAdapter.notifyDataSetChanged();
     }
 

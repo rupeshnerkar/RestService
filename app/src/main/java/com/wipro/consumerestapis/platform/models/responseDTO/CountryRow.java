@@ -1,4 +1,4 @@
-package com.example.consumerestapis.platform.models.responseDTO;
+package com.wipro.consumerestapis.platform.models.responseDTO;
 
 public class CountryRow {
 

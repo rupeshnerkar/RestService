@@ -1,9 +1,7 @@
-package com.example.consumerestapis.adapter;
+package com.wipro.consumerestapis.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.consumerestapis.R;
-import com.example.consumerestapis.callbacks.ImageDownloaderCallback;
-import com.example.consumerestapis.platform.models.responseDTO.CountryRow;
-import com.example.consumerestapis.retrofit.CountryDetailService;
+import com.squareup.picasso.Picasso;
+import com.wipro.consumerestapis.R;
+import com.wipro.consumerestapis.callbacks.ImageDownloaderCallback;
+import com.wipro.consumerestapis.platform.models.responseDTO.CountryRow;
+import com.wipro.consumerestapis.retrofit.CountryDetailService;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 public class CountryDetailsListAdapter extends RecyclerView.Adapter<CountryDetailsListAdapter.MyViewHolder> {
@@ -45,7 +41,8 @@ public class CountryDetailsListAdapter extends RecyclerView.Adapter<CountryDetai
         CountryRow newCountryRow = countryRows.get(position);
         holder.title.setText(newCountryRow.getTitle() == null ? "NA" : newCountryRow.getTitle());
         holder.description.setText(newCountryRow.getDescription() == null ? "NA" : newCountryRow.getDescription());
-        if (newCountryRow.getImageHref() != null) {
+        Picasso.with(this.mContext).load(newCountryRow.getImageHref()).into(holder.image_to_show);
+       /* if (newCountryRow.getImageHref() != null) {
             imageDownloader = new CountryDetailService.ImageDownloader(
                     new ImageDownloaderCallback() {
                         @Override
@@ -55,7 +52,7 @@ public class CountryDetailsListAdapter extends RecyclerView.Adapter<CountryDetai
                     }, holder
             );
             imageDownloader.execute(newCountryRow.getImageHref());
-        }
+        }*/
     }
 
     @Override
@@ -68,7 +65,7 @@ public class CountryDetailsListAdapter extends RecyclerView.Adapter<CountryDetai
         private TextView title, description;
         public ImageView image_to_show;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
             description = (TextView) itemView.findViewById(R.id.description);

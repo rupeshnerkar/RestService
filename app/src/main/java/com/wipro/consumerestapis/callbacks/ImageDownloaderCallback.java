@@ -1,4 +1,4 @@
-package com.example.consumerestapis.callbacks;
+package com.wipro.consumerestapis.callbacks;
 
 import android.graphics.Bitmap;
 

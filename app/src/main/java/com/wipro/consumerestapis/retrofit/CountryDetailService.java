@@ -1,11 +1,11 @@
-package com.example.consumerestapis.retrofit;
+package com.wipro.consumerestapis.retrofit;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
-import com.example.consumerestapis.adapter.CountryDetailsListAdapter;
-import com.example.consumerestapis.callbacks.ImageDownloaderCallback;
+import com.wipro.consumerestapis.adapter.CountryDetailsListAdapter;
+import com.wipro.consumerestapis.callbacks.ImageDownloaderCallback;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

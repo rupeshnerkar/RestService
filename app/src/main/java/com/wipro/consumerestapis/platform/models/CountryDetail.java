@@ -1,13 +1,13 @@
-package com.example.consumerestapis.platform.models;
+package com.wipro.consumerestapis.platform.models;
 
 import android.util.Log;
 
-import com.example.consumerestapis.platform.CountryInfoContract;
-import com.example.consumerestapis.platform.constants.APIConstants;
-import com.example.consumerestapis.platform.models.responseDTO.AboutCanadaResponseDTO;
-import com.example.consumerestapis.platform.models.responseDTO.CountryRow;
-import com.example.consumerestapis.retrofit.CountryDetailService;
-import com.example.consumerestapis.retrofit.GetCanadaApi;
+import com.wipro.consumerestapis.platform.CountryInfoContract;
+import com.wipro.consumerestapis.platform.constants.APIConstants;
+import com.wipro.consumerestapis.platform.models.responseDTO.AboutCanadaResponseDTO;
+import com.wipro.consumerestapis.platform.models.responseDTO.CountryRow;
+import com.wipro.consumerestapis.retrofit.CountryDetailService;
+import com.wipro.consumerestapis.retrofit.GetCanadaApi;
 
 import java.util.List;
 
