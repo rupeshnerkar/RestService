@@ -43,36 +43,6 @@ public class CountryDetailService {
         return retrofit;
     }
 
-    public static class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
-        private ImageDownloaderCallback imageDownloaderCallback;
-        private CountryDetailsListAdapter.MyViewHolder holder;
 
-        public ImageDownloader(ImageDownloaderCallback imageDownloaderCallback, CountryDetailsListAdapter.MyViewHolder holder) {
-            this.imageDownloaderCallback = imageDownloaderCallback;
-            this.holder = holder;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            URL url = null;
-            try {
-                url = new URL(strings[0]);
-                return BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            if (bitmap != null)
-                holder.image_to_show.setImageBitmap(bitmap);
-        }
-    }
-//    public static class ImageDownloader
 }
 

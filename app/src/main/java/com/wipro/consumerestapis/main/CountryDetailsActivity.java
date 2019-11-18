@@ -11,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.AutoText;
 import android.util.Log;
 import android.view.View;
 
@@ -21,6 +22,7 @@ import com.wipro.consumerestapis.platform.CountryInfoContract;
 import com.wipro.consumerestapis.platform.models.responseDTO.CountryRow;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.wipro.consumerestapis.platform.constants.LocalConstants.KEY_RECYCLER_STATE;
@@ -111,6 +113,7 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
         recyclerView = (RecyclerView) findViewById(R.id.main_recyclerview);
         countryRows = new ArrayList<>();
 
+
         countryDetailsListAdapter = new CountryDetailsListAdapter(CountryDetailsActivity.this, countryRows);
 
         layoutManager = new LinearLayoutManager(this);
@@ -136,7 +139,13 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
     @Override
     public void setListViewData(List<CountryRow> countryRows, String title) {
         swipeRefreshLayout.setRefreshing(false);
-        this.countryRows.addAll(countryRows);
+        for(int i=0; i<countryRows.size(); i++){
+            if(null != (countryRows.get(i)).getDescription() || null != (countryRows.get(i)).getImageHref() || null != (countryRows.get(i)).getTitle()){
+                this.countryRows.add(countryRows.get(i));
+            }
+        }
+      //  this.countryRows.addAll(countryRows);
+       /// this.countryRows.removeAll(countryRows);
         ((CountryDetailsActivity) this).getSupportActionBar().setTitle(title);
         countryDetailsListAdapter.notifyDataSetChanged();
     }

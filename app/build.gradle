@@ -11,6 +11,7 @@ android {
         versionName "1.0"
         maxSdkVersion 25
         multiDexEnabled = var
+        testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
 
     }
     buildTypes {
@@ -23,7 +24,20 @@ android {
 
 dependencies {
 
-    implementation 'com.android.support:appcompat-v7:25.3.1'
+    androidTestImplementation ('com.android.support.test.espresso:espresso-core:3.0.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation ('com.android.support.test.espresso:espresso-contrib:2.0') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+
+    androidTestImplementation "com.android.support.test:rules:1.0.2"
+    androidTestImplementation "com.android.support.test:runner:1.0.2"
+
+
+    implementation 'com.android.support:appcompat-v7:25.4.0'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.android.support:recyclerview-v7:25.4.0'
@@ -32,6 +46,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
     testImplementation 'junit:junit:4.12'
     //androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // testImplementation 'junit:junit:4.12'

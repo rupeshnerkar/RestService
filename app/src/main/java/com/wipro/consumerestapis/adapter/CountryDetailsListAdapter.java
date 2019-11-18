@@ -2,6 +2,7 @@ package com.wipro.consumerestapis.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ import java.util.List;
 public class CountryDetailsListAdapter extends RecyclerView.Adapter<CountryDetailsListAdapter.MyViewHolder> {
     private Context mContext;
     private List<CountryRow> countryRows;
-    private CountryDetailService.ImageDownloader imageDownloader;
 
     public CountryDetailsListAdapter(Context mContext, List<CountryRow> countryRows) {
         this.mContext = mContext;
@@ -41,7 +41,7 @@ public class CountryDetailsListAdapter extends RecyclerView.Adapter<CountryDetai
         CountryRow newCountryRow = countryRows.get(position);
         holder.title.setText(newCountryRow.getTitle() == null ? "NA" : newCountryRow.getTitle());
         holder.description.setText(newCountryRow.getDescription() == null ? "NA" : newCountryRow.getDescription());
-        Picasso.with(this.mContext).load(newCountryRow.getImageHref()).into(holder.image_to_show);
+        Picasso.with(this.mContext).load(newCountryRow.getImageHref()).placeholder(mContext.getDrawable(R.drawable.cover_small)).into(holder.image_to_show);
        /* if (newCountryRow.getImageHref() != null) {
             imageDownloader = new CountryDetailService.ImageDownloader(
                     new ImageDownloaderCallback() {
