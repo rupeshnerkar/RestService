@@ -64,7 +64,6 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
                     public void onClick(View view) {
                         if (isNetworkAvailable(CountryDetailsActivity.this)) {
                             init();
-
                             countryDetailAppPresenter = new CountryDetailAppPresenter(CountryDetailsActivity.this);
                             countryDetailAppPresenter.requestDataFromServer();
                         } else {
@@ -125,8 +124,13 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                countryRows.clear();
-                countryDetailAppPresenter.requestDataFromServer();
+                if (isNetworkAvailable(CountryDetailsActivity.this)) {
+                    countryRows.clear();
+                    countryDetailAppPresenter.requestDataFromServer();
+                } else {
+                    openSnackbar();
+                }
+
             }
         });
     }
