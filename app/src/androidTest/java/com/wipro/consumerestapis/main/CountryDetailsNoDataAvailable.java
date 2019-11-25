@@ -14,48 +14,34 @@ import com.wipro.consumerestapis.R;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class CountryDetailsActivityTest {
+public class CountryDetailsNoDataAvailable {
 
     @Rule
     public ActivityTestRule<CountryDetailsActivity> mActivityTestRule = new ActivityTestRule<>(CountryDetailsActivity.class);
 
     @Test
-    public void countryDetailsActivityTest2() {
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.main_recyclerview),
-                        childAtPosition(
-                                allOf(withId(R.id.swipe_container),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                                0)),
-                                0),
+    public void countryDetailsNoDataAvailable() {
+        ViewInteraction relativeLayout = onView(
+                allOf(childAtPosition(
+                        allOf(withId(R.id.main_recyclerview),
+                                childAtPosition(
+                                        withId(R.id.swipe_container),
+                                        0)),
+                        0),
                         isDisplayed()));
-        recyclerView.check(matches(isDisplayed()));
-
-        ViewInteraction recyclerView2 = onView(
-                allOf(withId(R.id.main_recyclerview),
-                        childAtPosition(
-                                allOf(withId(R.id.swipe_container),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        recyclerView2.check(doesNotExist());
+        relativeLayout.check(doesNotExist());
     }
 
     private static Matcher<View> childAtPosition(
