@@ -1,6 +1,7 @@
 package com.wipro.consumerestapis.main;
 
 
+import android.app.Activity;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -11,6 +12,7 @@ import com.wipro.consumerestapis.adapter.CountryDetailsListAdapter;
 import com.wipro.consumerestapis.platform.CountryDetailAppPresenter;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,8 +30,17 @@ public class CountryDetailsActivityTest2 {
     CountryDetailAppPresenter countryDetailAppPresenter;
 
     @Rule
-    public ActivityTestRule<CountryDetailsActivity> mActivityTestRule = new ActivityTestRule<>(CountryDetailsActivity.class);
+    public ActivityTestRule<CountryDetailsActivity> mActivityTestRule = new ActivityTestRule<>(CountryDetailsActivity.class, true);
 
+    @Before
+    public void initre() {
+        CountryDetailsActivity countryDetailsActivity = new CountryDetailsActivity(new Activity());
+
+        countryDetailsActivity.init();
+
+        countryDetailAppPresenter = new CountryDetailAppPresenter(mActivityTestRule.getActivity());
+        countryDetailAppPresenter.requestDataFromServer();
+    }
 
     public int myTest() {
         RecyclerView recyclerView = mActivityTestRule.getActivity().findViewById(R.id.main_recyclerview);
@@ -37,13 +48,7 @@ public class CountryDetailsActivityTest2 {
         return totalCount;
     }
 
-    @Before
-    public void init() {
-        mActivityTestRule.getActivity().init();
 
-        countryDetailAppPresenter = new CountryDetailAppPresenter(mActivityTestRule.getActivity());
-        countryDetailAppPresenter.requestDataFromServer();
-    }
 
     @Test
     public void chkDataRecycleView() {

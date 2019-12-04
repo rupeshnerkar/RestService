@@ -47,7 +47,7 @@ public class CountryDetailsListAdapter extends RecyclerView.Adapter<CountryDetai
         Picasso.Builder picassoBuilder = new Picasso.Builder(mContext);
         picassoBuilder.downloader(new OkHttp3Downloader(mContext));
         final Picasso picasso = picassoBuilder.build();
-              final Bitmap[] bitmap = new Bitmap[1];
+        final Bitmap[] bitmap = new Bitmap[1];
         final String finalImageUrl = imageUrl;
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -55,7 +55,7 @@ public class CountryDetailsListAdapter extends RecyclerView.Adapter<CountryDetai
                 try {
                     if (finalImageUrl != null) {
                         bitmap[0] = picasso.load(finalImageUrl).get();
-                    }else{
+                    } else {
                         bitmap[0] = picasso.load(R.drawable.cover_small).get();
                     }
 

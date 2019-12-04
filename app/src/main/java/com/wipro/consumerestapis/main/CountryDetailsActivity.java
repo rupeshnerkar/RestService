@@ -1,5 +1,6 @@
 package com.wipro.consumerestapis.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -39,6 +40,11 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
     List<CountryRow> countryRows;
     CountryDetailsListAdapter countryDetailsListAdapter;
     CountryDetailAppPresenter countryDetailAppPresenter;
+    Context context;
+
+    public CountryDetailsActivity(Context context) {
+        this.context = context;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +119,7 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
         countryRows = new ArrayList<>();
 
 
+//        canadaInfoModel.getCanadaDetails(this);
         countryDetailsListAdapter = new CountryDetailsListAdapter(CountryDetailsActivity.this, countryRows);
 
         layoutManager = new LinearLayoutManager(this);
@@ -153,6 +160,7 @@ public class CountryDetailsActivity extends AppCompatActivity implements Country
         ((CountryDetailsActivity) this).getSupportActionBar().setTitle(title);
         countryDetailsListAdapter.notifyDataSetChanged();
     }
+
 
 
 }
